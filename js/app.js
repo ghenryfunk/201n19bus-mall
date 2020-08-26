@@ -1,14 +1,14 @@
 'use strict';
 
 var productArray = [];
-var clickedArray = [];
+// var clickedArray = [];
 // var viewedArray = [];
 
 var imgOneEl = document.getElementById('img-one');
 var imgTwoEl = document.getElementById('img-two');
 var imgThreeEl = document.getElementById('img-three');
 var imgContainer = document.getElementById('image-container');
-var containerChild = document.getElementById('container-child');
+var ulEl = document.getElementById('list-parent');
 
 var clicks = 5;
 
@@ -82,11 +82,13 @@ function stopClicks() {
   imgOneEl.removeEventListener('click', handleClick);
   imgTwoEl.removeEventListener('click', handleClick);
   imgThreeEl.removeEventListener('click', handleClick);
+  console.log(productArray);
   for (var i = 0; i < productArray.length; i++) {
-    containerChild.textContent = `You viewed ${productArray[i].name}, and you clicked ${clickedArray}`;
-    imgContainer.appendChild(containerChild);
+    var listEl = document.createElement('li');
+    listEl.textContent = `${productArray[i].name}, clicked ${productArray[i].clicked} times, viewed ${productArray[i].viewed} times.`;
+    ulEl.appendChild(listEl);
   }
-  console.log(clickedArray);
+  // console.log(clickedArray);
 }
 
 function handleClick(e) {
@@ -95,13 +97,14 @@ function handleClick(e) {
   for (var i = 0; i < productArray.length; i++) {
     if (productArray[i].name === e.target.alt) {
       productArray[i].clicked++;
-      clickedArray.push(productArray[i].name); // This is pushing way more than the 5 clicks...
+      // clickedArray.push(productArray[i].name); // This is pushing way more than the 5 clicks...
       renderProducts();
     }
   }
   if (clicks === 0) {
     stopClicks();
   }
+  console.log(productArray);
 }
 
 renderProducts();
