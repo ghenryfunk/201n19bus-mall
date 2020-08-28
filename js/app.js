@@ -1,16 +1,18 @@
 'use strict';
 
 var productArray = [];
+var secondaryArray = [];
 // var clickedArray = [];
 // var viewedArray = [];
 
 var imgOneEl = document.getElementById('img-one');
 var imgTwoEl = document.getElementById('img-two');
 var imgThreeEl = document.getElementById('img-three');
-var imgContainer = document.getElementById('image-container');
-var ulEl = document.getElementById('list-parent');
 
-var clicks = 5;
+var theadEl = document.getElementById('thead');
+var tbodyEl = document.getElementById('tbody');
+
+var clicks = 25;
 
 function Product(name, src) {
   this.name = name;
@@ -83,11 +85,12 @@ function stopClicks() {
   imgTwoEl.removeEventListener('click', handleClick);
   imgThreeEl.removeEventListener('click', handleClick);
   console.log(productArray);
-  for (var i = 0; i < productArray.length; i++) {
-    var listEl = document.createElement('li');
-    listEl.textContent = `${productArray[i].name}, clicked ${productArray[i].clicked} times, viewed ${productArray[i].viewed} times.`;
-    ulEl.appendChild(listEl);
-  }
+  renderTableResults();
+  // for (var i = 0; i < productArray.length; i++) {
+  //   var listEl = document.createElement('li');
+  //   listEl.textContent = `${productArray[i].name}, clicked ${productArray[i].clicked} times, viewed ${productArray[i].viewed} times.`;
+  //   ulEl.appendChild(listEl);
+  // }
   // console.log(clickedArray);
 }
 
@@ -109,4 +112,25 @@ function handleClick(e) {
 
 renderProducts();
 
+// Working on rendering a table for results (prior to chartJS)//
 
+function createElement(element, textContent, parent) {
+  var newElement = document.createElement(element);
+  newElement.textContent = textContent;
+  parent.appendChild(newElement);
+  return newElement;
+}
+
+function renderTableResults(){
+  var trHead = createElement('tr', '', theadEl);
+  createElement('td', 'Product', trHead);
+  createElement('td', '# of views', trHead);
+  createElement('td', '# of clicks', trHead);
+
+  for (var i = 0; i < productArray.length; i++) {
+    var trBody = createElement('tr', '', tbodyEl);
+    createElement('td', productArray[i].name, trBody);
+    createElement('td', productArray[i].viewed, trBody);
+    createElement('td', productArray[i].clicked, trBody);
+  }
+}
