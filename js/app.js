@@ -86,6 +86,7 @@ function stopClicks() {
   imgThreeEl.removeEventListener('click', handleClick);
   console.log(productArray);
   renderTableResults();
+  renderChart();
   // for (var i = 0; i < productArray.length; i++) {
   //   var listEl = document.createElement('li');
   //   listEl.textContent = `${productArray[i].name}, clicked ${productArray[i].clicked} times, viewed ${productArray[i].viewed} times.`;
@@ -121,7 +122,7 @@ function createElement(element, textContent, parent) {
   return newElement;
 }
 
-function renderTableResults(){
+function renderTableResults() {
   var trHead = createElement('tr', '', theadEl);
   createElement('td', 'Product', trHead);
   createElement('td', '# of views', trHead);
@@ -133,4 +134,94 @@ function renderTableResults(){
     createElement('td', productArray[i].viewed, trBody);
     createElement('td', productArray[i].clicked, trBody);
   }
+}
+
+function populateChartData() {
+  var labelArray = [];
+  var viewArray = [];
+  var clickArray = [];
+
+  for (var i = 0; i < productArray.length; i++) {
+    labelArray.push(productArray[i].name);
+    viewArray.push(productArray[i].viewed);
+    clickArray.push(productArray[i].clicked);
+  }
+  return [labelArray, viewArray, clickArray];
+}
+
+function renderChart(){
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart = new Chart(ctx, { //eslint-disable-line
+    type: 'bar',
+    data: {
+      labels: populateChartData()[0],
+      datasets: [
+        {
+          label: '# of views',
+          data: populateChartData()[1],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.7)',
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(255, 206, 86, 0.7)',
+            'rgba(75, 192, 192, 0.7)',
+            'rgba(153, 102, 255, 0.7)',
+            'rgba(255, 159, 64, 0.7)',
+            'rgba(255, 99, 132, 0.7)',
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(255, 206, 86, 0.7)',
+            'rgba(75, 192, 192, 0.7)',
+            'rgba(153, 102, 255, 0.7)',
+            'rgba(255, 159, 64, 0.7)',
+            'rgba(255, 99, 132, 0.7)',
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(255, 206, 86, 0.7)',
+            'rgba(75, 192, 192, 0.7)',
+            'rgba(153, 102, 255, 0.7)',
+            'rgba(255, 159, 64, 0.7)',
+            'rgba(255, 99, 132, 0.7)',
+            'rgba(54, 162, 235, 0.7)',
+          ],
+          borderWidth: 1,
+        },
+        {
+          label: '# of clicks',
+          data: populateChartData()[2],
+          backgroundColor: [
+            'rgba(255, 99, 132)',
+            'rgba(54, 162, 235)',
+            'rgba(255, 206, 86)',
+            'rgba(75, 192, 192)',
+            'rgba(153, 102, 255)',
+            'rgba(255, 159, 64)',
+            'rgba(255, 99, 132)',
+            'rgba(54, 162, 235)',
+            'rgba(255, 206, 86)',
+            'rgba(75, 192, 192)',
+            'rgba(153, 102, 255)',
+            'rgba(255, 159, 64)',
+            'rgba(255, 99, 132)',
+            'rgba(54, 162, 235)',
+            'rgba(255, 206, 86)',
+            'rgba(75, 192, 192)',
+            'rgba(153, 102, 255)',
+            'rgba(255, 159, 64)',
+            'rgba(255, 99, 132)',
+            'rgba(54, 162, 235)',
+          ],
+          borderWidth: 1,
+        }
+      ],
+    },
+    options: {
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true,
+            },
+          },
+        ],
+      },
+    },
+  });
 }

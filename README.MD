@@ -24,3 +24,8 @@ Create a property attached to the constructor function itself that keeps track o
 After voting rounds have been completed, remove the event listeners on the product.
 
 Display the list of all the products followed by the votes received and number of times seen for each. Example: Banana Slicer had 3 votes and was shown 5 times
+
+
+# Chart Demo
+
+[![](https://data.jsdelivr.com/v1/package/npm/chart.js/badge)](https://www.jsdelivr.com/package/npm/chart.js)

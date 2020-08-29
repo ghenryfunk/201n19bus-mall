@@ -67,7 +67,7 @@ main h1 {
 }
 
 main img {
-  margin-top: 30px;
+  margin-top: 0px;
   border: solid rgb(35, 35, 75);
   border-radius: 10px;
   width: 260px;
@@ -85,7 +85,7 @@ main li:first-child {
 
 main li {
   margin-left: 30px;
-  margin-top: 30px;
+  margin-top: 0px;
   float: left;
 } 
 
@@ -137,3 +137,9 @@ th {
 td {
     text-align: center;
 }
+
+/* // chart design // */
+
+/* canvas {
+  background-color: rgb(224, 255, 255, 0.6);
+} */
